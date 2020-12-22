@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @date 2020/6/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class TenantAuthenticationProvider extends DaoAuthenticationProvider {
     @Override

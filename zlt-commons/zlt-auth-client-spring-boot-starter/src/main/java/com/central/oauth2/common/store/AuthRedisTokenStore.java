@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * @date 2018/7/25 9:36
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @ConditionalOnProperty(prefix = "zlt.oauth2.token.store", name = "type", havingValue = "redis", matchIfMissing = true)
 public class AuthRedisTokenStore {

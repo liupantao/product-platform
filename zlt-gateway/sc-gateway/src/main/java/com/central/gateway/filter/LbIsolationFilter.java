@@ -23,7 +23,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
  * @date 2019/10/7
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Component
 @ConditionalOnProperty(name = ConfigConstants.CONFIG_RIBBON_ISOLATION_ENABLED, havingValue = "true")

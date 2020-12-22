@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/5/5
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @ConditionalOnClass(RedissonClient.class)
 @ConditionalOnProperty(prefix = "zlt.lock", name = "lockerType", havingValue = "REDIS", matchIfMissing = true)

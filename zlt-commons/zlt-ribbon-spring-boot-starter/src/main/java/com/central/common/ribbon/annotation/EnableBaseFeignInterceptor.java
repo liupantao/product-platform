@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * @date 2019/10/26
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

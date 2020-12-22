@@ -37,7 +37,7 @@ import java.util.Map;
  * @date 2019/5/7
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Service
 public class AggregationServiceImpl implements IAggregationService {

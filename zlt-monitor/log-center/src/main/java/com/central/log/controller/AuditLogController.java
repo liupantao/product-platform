@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/2/4
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @RestController
 public class AuditLogController {

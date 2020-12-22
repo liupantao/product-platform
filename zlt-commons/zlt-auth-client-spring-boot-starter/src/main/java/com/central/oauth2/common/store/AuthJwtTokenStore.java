@@ -26,7 +26,7 @@ import java.util.Map;
  * @date 2018/7/24 16:21
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @ConditionalOnProperty(prefix = "zlt.oauth2.token.store", name = "type", havingValue = "authJwt")
 public class AuthJwtTokenStore {

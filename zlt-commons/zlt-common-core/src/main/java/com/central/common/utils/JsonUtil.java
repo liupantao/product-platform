@@ -21,7 +21,7 @@ import java.util.TimeZone;
  * @date 2020/10/8
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class JsonUtil {
     private final static ObjectMapper MAPPER = new ObjectMapper();

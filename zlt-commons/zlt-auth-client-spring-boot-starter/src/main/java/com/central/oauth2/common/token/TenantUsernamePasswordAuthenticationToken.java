@@ -13,7 +13,7 @@ import java.util.Collection;
  * @date 2020/6/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class TenantUsernamePasswordAuthenticationToken extends UsernamePasswordAuthenticationToken {
     private static final long serialVersionUID = -5638287853803374687L;

@@ -25,7 +25,7 @@ import javax.annotation.Resource;
  * @date 2018/10/24
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Configuration
 @EnableAuthorizationServer

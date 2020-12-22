@@ -19,7 +19,7 @@ import java.util.Map;
  * @date 2020/7/11
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class OpenIdGranter extends AbstractTokenGranter {
     private static final String GRANT_TYPE = "openId";

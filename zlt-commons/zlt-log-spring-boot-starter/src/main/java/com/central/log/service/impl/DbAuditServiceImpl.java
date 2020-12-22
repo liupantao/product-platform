@@ -23,7 +23,7 @@ import javax.sql.DataSource;
  * @date 2020/2/8
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Slf4j
 @ConditionalOnProperty(name = "zlt.audit-log.log-type", havingValue = "db")

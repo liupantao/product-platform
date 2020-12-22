@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2018/12/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface IValidateCodeService {
     /**

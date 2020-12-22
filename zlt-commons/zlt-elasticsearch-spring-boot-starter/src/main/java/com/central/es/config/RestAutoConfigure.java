@@ -22,7 +22,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @date 2020/3/28
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @EnableConfigurationProperties(RestClientPoolProperties.class)
 public class RestAutoConfigure {

@@ -16,7 +16,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  * @date 2019/10/5
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Configuration
 public class CorsConfig {

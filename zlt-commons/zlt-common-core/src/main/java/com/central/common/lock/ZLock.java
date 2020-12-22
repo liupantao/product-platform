@@ -10,7 +10,7 @@ import lombok.Getter;
  * @date 2020/7/28
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @AllArgsConstructor
 public class ZLock implements AutoCloseable {

@@ -21,7 +21,7 @@ import java.io.PrintWriter;
  * @date 2020/3/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Slf4j
 public class OauthLogoutSuccessHandler implements LogoutSuccessHandler {

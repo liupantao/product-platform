@@ -34,7 +34,7 @@ import java.util.*;
  * @date 2019/4/23
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Service
 public class IndexServiceImpl implements IIndexService {

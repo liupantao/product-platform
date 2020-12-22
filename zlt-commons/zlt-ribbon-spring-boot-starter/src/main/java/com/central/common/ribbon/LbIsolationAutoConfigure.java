@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClients;
  * @date 2019/9/3
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @ConditionalOnProperty(value = ConfigConstants.CONFIG_RIBBON_ISOLATION_ENABLED, havingValue = "true")
 @RibbonClients(defaultConfiguration = {RuleConfigure.class})

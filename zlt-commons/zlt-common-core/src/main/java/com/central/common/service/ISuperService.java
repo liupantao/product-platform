@@ -11,7 +11,7 @@ import com.central.common.lock.DistributedLock;
  * @date 2019/1/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface ISuperService<T> extends IService<T> {
     /**

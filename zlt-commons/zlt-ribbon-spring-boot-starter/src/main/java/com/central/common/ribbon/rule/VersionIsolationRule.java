@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * @date 2019/9/3
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class VersionIsolationRule extends RoundRobinRule {
     private final static String KEY_DEFAULT = "default";

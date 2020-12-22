@@ -28,7 +28,7 @@ import java.util.Map;
  * @date 2020/3/29
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Slf4j
 @Component

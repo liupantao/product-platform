@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2020/6/10
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Setter
 public class TenantUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

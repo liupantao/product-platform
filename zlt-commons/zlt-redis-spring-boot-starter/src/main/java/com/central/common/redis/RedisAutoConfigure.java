@@ -26,7 +26,7 @@ import java.util.Map;
  * @date 2018/11/6 11:02
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class})
 @EnableCaching

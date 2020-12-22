@@ -20,7 +20,7 @@ import java.util.Map;
  * @author zlt
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Api(tags = "应用")
 @RestController

@@ -9,7 +9,7 @@ import com.central.log.model.Audit;
  * @date 2020/2/3
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface IAuditService {
     void save(Audit audit);

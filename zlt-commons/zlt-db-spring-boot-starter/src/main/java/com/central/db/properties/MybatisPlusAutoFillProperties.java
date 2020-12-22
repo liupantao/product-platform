@@ -12,7 +12,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @date 2020/4/5
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Setter
 @Getter

@@ -16,7 +16,7 @@ import java.util.Map;
  * @date 2020/7/11
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class PwdImgCodeGranter extends ResourceOwnerPasswordTokenGranter {
     private static final String GRANT_TYPE = "password_code";

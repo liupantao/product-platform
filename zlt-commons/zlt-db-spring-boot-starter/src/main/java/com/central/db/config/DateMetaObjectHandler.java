@@ -13,7 +13,7 @@ import java.util.Date;
  * @date 2018/12/11
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class DateMetaObjectHandler implements MetaObjectHandler {
     private MybatisPlusAutoFillProperties autoFillProperties;

@@ -22,7 +22,7 @@ import java.io.IOException;
  * @date 2020/3/29
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public class LoginProcessSetTenantFilter extends OncePerRequestFilter {
     private static final String SAVED_REQUEST = "SPRING_SECURITY_SAVED_REQUEST";

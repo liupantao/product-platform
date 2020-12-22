@@ -12,7 +12,7 @@ import com.central.common.service.ISuperService;
  * @author zlt
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface ISysRoleService extends ISuperService<SysRole> {
 	void saveRole(SysRole sysRole) throws Exception;

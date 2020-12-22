@@ -21,7 +21,7 @@ import java.util.List;
  * @date 2020/7/26
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 @Configuration
 public class FeignConfig {

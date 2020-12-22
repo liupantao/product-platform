@@ -11,7 +11,7 @@ import java.util.Map;
  * @author zlt
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface IClientService extends ISuperService<Client> {
     Result saveClient(Client clientDto) throws Exception;

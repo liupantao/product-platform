@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/5/29 14:12
  * <p>
  * Blog: https://zlt2000.gitee.io
- * Github: https://github.com/zlt2000
+ * Github:
  */
 public interface DistributedLock {
     /**
