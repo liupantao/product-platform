@@ -16,15 +16,15 @@ mybatis-plus:
 zlt:
   swagger:
     enabled: true
-    title: 用户中心
-    description: 用户中心接口文档
+    title: 基础模块中心
+    description: 基础模块接口文档
     version: 1.0
-    base-package: com.central.user.controller
+    base-package: com.central.base.controller
   cache-manager:
     configs:
-      - key: menu
+      - key: base
         second: 300
-      - key: user
+      - key: base
         second: 1800
   #多租户配置
   tenant:

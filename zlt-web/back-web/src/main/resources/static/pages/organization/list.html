@@ -1,0 +1,148 @@
+<style>
+    .leftTable{
+        float:left;
+        width: 48%;
+    }
+    .rightTable{
+        float:right;
+        width: 48%;
+    }
+</style>
+
+<div class="layui-card">
+    <div class="layui-card-header">
+        <h2 class="header-title">用户管理</h2>
+        <span class="layui-breadcrumb pull-right">
+          <a href="#!console">首页</a>
+          <a><cite>用户管理</cite></a>
+        </span>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-form toolbar">
+            搜索：
+            <select id="organization-search-key">
+                <option value="">-请选择-</option>
+                <option value="user_id">ID</option>
+                <option value="username">账号</option>
+                <option value="nick_name">用户名</option>
+                <option value="mobile">手机号</option>
+            </select>&emsp;
+            <input id="organization-search-value" class="layui-input search-input" type="text" placeholder="输入关键字"/>&emsp;
+            <button id="organization-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+            <button id="organization-btn-add" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+            <button id="organization-btn-export" class="layui-btn icon-btn"><i class="layui-icon">&#xe601;</i>导出</button>
+            <button type="button" class="layui-btn" id="organization-btn-import">
+                <i class="layui-icon">&#xe67c;</i>导入
+            </button>
+        </div>
+        <div class="leftTable">
+            <table id="organization-leftTable" class="layui-table" lay-filter="organization-leftTable">
+            </table>
+        </div>
+
+        <div class="rightTable" id='MyModel'>
+            <table id="organization-rightTable" class="layui-table" lay-filter="organization-rightTable"></table>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    layui.use(['form', 'table', 'util', 'config', 'admin', 'upload', 'treetable'], function () {
+        var form = layui.form;
+        var table = layui.table;
+        var config = layui.config;
+        var layer = layui.layer;
+        var util = layui.util;
+        var admin = layui.admin;
+        //上传
+        var upload = layui.upload;
+        let treetable = layui.treetable;
+        // 渲染表格
+        var renderTable = function (param) {
+            if (param) {
+                param.access_token = config.getToken().access_token;
+            } else {
+                param = {
+                    access_token: config.getToken().access_token
+                };
+            }
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: -1,
+                treeIdName: 'id',
+                treePidName: 'parentId',
+                elem: '#organization-leftTable',
+                url: config.base_server + 'api-user/menus/findAlls',
+                where: param,
+                page: false,
+                cols: [[
+                    {type: 'numbers'},
+                    {field: 'name', minWidth: 200, title: '菜单名称'},
+                    {field: 'url', title: '菜单url'},
+                    {field: 'path', title: '菜单path'},
+                    {field: 'css',  align: 'center', title: '样式'},
+                    {field: 'sort', width: 80, align: 'center', title: '排序号'},
+                    {
+                        field: 'type', width: 80, align: 'center', templet: function (d) {
+                            if (d.type === 2) {
+                                return '<span class="layui-badge layui-bg-gray">资源</span>';
+                            }
+                            if (d.parentId === -1) {
+                                return '<span class="layui-badge layui-bg-blue">目录</span>';
+                            } else {
+                                return '<span class="layui-badge-rim">菜单</span>';
+                            }
+                        }, title: '类型'
+                    },
+                    {templet: '#menus-state', width: 120, align: 'center', title: '操作'}
+                ]]
+            });
+        };
+        renderTable({tenantId: config.clientId});
+
+
+
+
+        var cols = [[
+            {type :'checkbox', fixed: 'left'},
+            {field:'username', title: '货主简称',width:'200px'},
+            {field:'carrierShortName', title: '承运商分公司简称',width:'10%'},
+            {field:'warehouseId', title: '仓库ID',width:'10%'},
+            {field:'vin', title: '车架号',width:'10%'},
+            {field:'brand', title: '品牌',width:'10%'},
+            {field:'model', title: '车型',width:'8%'},
+            {field:'vehicleStruct', title: '车身结构',width:'5%'},
+            {field:'exteriorColor', title: '外观色',width:'5%'},
+            {field:'interiorColor', title: '内饰色',width:'5%'},
+            {field:'orderNo', title: '订单号',width:'10%'},
+            {field:'createTime', title: '入库时间',width:'10%'}
+        ]];
+        var tableElement = table.render({
+            elem : '#organization-rightTable',
+            method : 'GET',
+            url: config.base_server + 'api-user/users',
+            headers:{'Authorization': 'Bearer ' + config.getToken().access_token},
+            cellMinWidth : 80,
+            height : 'full',
+            cols : cols,
+            page : true,
+            limits: [10,30,90,150],
+            limit: 10,
+            done: function(res, page, count, convertArray){
+                currentPage = page;
+            }
+        });
+
+
+
+        //判断权限，没有权限则隐藏按钮
+        /*let resList = ['organization-btn-add','organization-btn-export','organization-btn-import'];
+        for(let i = 0; i < resList.length; i++){
+            if (!admin.hasPerm(resList[i])) {
+                $('#'+resList[i]).hide();
+            }
+        }*/
+    });
+</script>
