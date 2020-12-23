@@ -1,0 +1,51 @@
+<!-- 表单弹窗 -->
+<form id="codeItem-form" lay-filter="codeItem-form" class="layui-form model-form">
+    <input name="codemapId" id="codemapId" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">代码值</label>
+        <div class="layui-input-block">
+            <input name="itemValue" placeholder="代码值" type="text" class="layui-input" maxlength="20"
+                   lay-verify="required" required/>
+        </div>
+        <label class="layui-form-label">代码描述</label>
+        <div class="layui-input-block">
+            <input name="itemCaption" placeholder="代码描述" type="text" class="layui-input"
+                   maxlength="20"
+                   lay-verify="required" required/>
+        </div>
+        <label class="layui-form-label">顺序</label>
+        <div class="layui-input-block">
+            <input name="itemIndex" type="number" class="layui-input" maxlength="20"
+                   lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item model-form-footer">
+        <button class="layui-btn layui-btn-primary" ew-event="closeDialog" type="button">取消</button>
+        <button class="layui-btn" lay-filter="codeItem-form-submit" lay-submit>保存</button>
+    </div>
+</form>
+
+<script>
+    //var codemapId = parent.codemapId;
+    layui.use(['layer', 'admin', 'form'], function () {
+        var layer = layui.layer;
+        var admin = layui.admin;
+        var form = layui.form;
+        $("#codemapId").val(admin.getTempData("codemapId"));
+        // 表单提交事件
+        form.on('submit(codeItem-form-submit)', function (data) {
+            layer.load(2);
+            admin.req('api-user/codeItem/save/', JSON.stringify(data.field), function (data) {
+                layer.closeAll('loading');
+                if (data.resp_code == 0) {
+                    layer.msg(data.resp_msg, {icon: 1, time: 500});
+                    admin.finishPopupCenter();
+                } else {
+                    layer.msg(data.resp_msg, {icon: 2, time: 500});
+                }
+            }, "POST");
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,260 @@
+<style>
+    #codeMapTable + .layui-table-view .layui-table-tool-temp {
+        padding-right: 0;
+    }
+
+    #codeMapTable + .layui-table-view .layui-table-body tbody > tr td {
+        cursor: pointer;
+    }
+
+    #codeMapTable + .layui-table-view .layui-table-body tbody > tr.layui-table-click {
+        background-color: #fff3e0;
+    }
+
+    #codeMapTable + .layui-table-view .layui-table-body tbody > tr.layui-table-click td:last-child > div:before {
+        position: absolute;
+        right: 6px;
+        content: "\e602";
+        font-size: 12px;
+        font-style: normal;
+        font-family: layui-icon !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+</style>
+
+<!-- 正文开始 -->
+<div class="layui-fluid" style="padding-bottom: 0;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body" style="padding: 10px;">
+                    <!-- 表格工具栏1 -->
+                    <div class="layui-form toolbar">
+                        代码：<input id="codemap-code-search" class="layui-input search-input"
+                                  type="text" placeholder="输入编码"/>&emsp;
+                        描述：<input id="codemap-capation-search" class="layui-input search-input"
+                                  type="text" placeholder="输入描述"/>&emsp;
+                        <button id="codemap-btn-search" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                        <button id="codemap-cache-update" class="layui-btn icon-btn"><i
+                                class="fa fa-refresh">&#xe615;</i>同步缓存
+                        </button>
+                        <button id="codemap-btn-add" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe654;</i>添加
+                        </button>
+                        <button id="codemap-btn-delete" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe601;</i>删除
+                        </button>
+
+                    </div>
+
+                    <!-- 数据表格1 -->
+                    <table id="codeMapTable" lay-filter="codeMapTable"></table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body" style="padding: 10px;">
+                    <!-- 表格工具栏2 -->
+                    <div class="layui-form toolbar">
+                        <input id="codeitem-search-value" class="layui-input search-input"
+                               type="text" placeholder="代码值"/>&emsp;
+                        <input id="codeitem-search-capation" class="layui-input search-input"
+                               type="text" placeholder="代码描述"/>
+                        <button id="codeitem-btn-search" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                        <button id="codeitem-btn-add" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe654;</i>添加
+                        </button>
+                        <button id="codeitem-btn-delete" class="layui-btn icon-btn"><i
+                                class="layui-icon">&#xe601;</i>删除
+                        </button>
+                    </div>
+
+                    <table class="layui-table" id="codeitemTable"
+                           lay-filter="codeitemTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    layui.use(['form', 'table', 'util', 'config', 'admin', 'upload'], function () {
+        var form = layui.form;
+        var table = layui.table;
+        var config = layui.config;
+        var layer = layui.layer;
+        var util = layui.util;
+        var admin = layui.admin;
+        //上传
+        var upload = layui.upload;
+
+        // 渲染表格
+        table.render({
+            elem: '#codeMapTable',
+            url: config.base_server + 'api-user/codeMap/list',
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + config.getToken().access_token},
+            page: true,
+            cols: [[
+                {type: 'checkbox'},
+                {field: 'code', sort: true, title: '代码'},
+                {field: 'capation', sort: true, title: '描述'},
+                /*
+                                {field: 'type', sort: true, title: '类型'},
+                */
+            ]]
+        });
+        //表格2
+        // 渲染表格
+        table.render({
+            elem: '#codeitemTable',
+            url: config.base_server + 'api-user/codeItem/list',
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + config.getToken().access_token},
+            page: true,
+            cols: [[
+                {type: 'checkbox'},
+                {field: 'itemValue', sort: true, title: '代码值'},
+                {field: 'itemCaption', sort: true, title: '代码描述'},
+                {field: 'itemIndex', sort: true, title: '顺序'},
+                /*{field: 'createTime', sort: true, title: '创建时间'}*/
+
+            ]],
+
+        });
+
+        //监听表格1
+        //以复选框事件为例
+        table.on('checkbox(codeMapTable)', function (obj) {
+            //  console.log(obj);
+            var data = obj.data;
+            /*var code = $('#codemap-code-search').val();
+            var capation = $('#codemap-capation-search').val();*/
+
+            table.reload('codeitemTable', {where: {codemapId: data.id}});
+
+        });
+
+        // 搜索按钮点击事件
+        $('#codemap-btn-search').click(function () {
+            var code = $('#codemap-code-search').val();
+            var capation = $('#codemap-capation-search').val();
+            table.reload('codeMapTable', {where: {code: code, capation: capation}});
+        });
+        // 搜索详情按钮点击事件
+        $('#codeitem-btn-search').click(function () {
+            var itemVal = $('#codeitem-search-value').val();
+            var capation = $('#codeitem-search-capation').val();
+            table.reload('codeitemTable', {where: {itemVal: itemVal, capation: capation}});
+        });
+        //代码主类新增
+        $('#codemap-btn-add').click(function () {
+            admin.popupCenter({
+                title: "新增",
+                path: 'pages/youi/codeMap_form.html',
+                finish: function () {
+                    table.reload('codeMapTable', {});
+                }
+            });
+        });
+        //删除主类信息
+        $('#codemap-btn-delete').click(function () {
+            var checkedRows = table.checkStatus('codeMapTable').data || [];
+            if (checkedRows.length <= 0) {
+                layer.msg("请勾选要删除的复选框！");
+                return;
+            } else if (checkedRows.length > 1) {
+                layer.msg("每次只能删除一条数据！");
+                return;
+            }
+            var rowData = checkedRows[0];
+            layer.confirm('确定删除吗？', function (i) {
+                admin.req('api-user/codeMap/' + rowData.id, {}, function (data) {
+                    layer.closeAll('loading');
+                    if (data.resp_code == 0) {
+                        layer.msg(data.resp_msg, {icon: 1, time: 500});
+                        table.reload('codeMapTable', {});
+                    } else {
+                        layer.msg(data.resp_msg, {icon: 2, time: 500});
+                    }
+                }, 'delete');
+            });
+        });
+
+        $('#codemap-cache-update').click(function () {
+
+            var checkedRows = table.checkStatus('codeMapTable').data || [];
+            if (checkedRows.length <= 0) {
+                layer.msg("请勾选要同步数据的复选框！");
+                return;
+            } else if (checkedRows.length > 1) {
+                layer.msg("每次只能同步一条数据！");
+                return;
+            }
+            var rowData = checkedRows[0];
+            admin.req('api-user/codeMap/updateCache/' + rowData.id, {}, function (data) {
+                layer.closeAll('loading');
+                if (data.resp_code == 0) {
+                    layer.msg(data.resp_msg, {icon: 1, time: 500});
+                    //table.reload('table-user', {});
+                } else {
+                    layer.msg(data.resp_msg, {icon: 2, time: 500});
+                    $(obj.elem).prop('checked', !obj.elem.checked);
+                    form.render('checkbox');
+                }
+            }, 'PUT');
+        });
+        //右边详情
+        //代码详情新增
+        $('#codeitem-btn-add').click(function () {
+            var checkedRows = table.checkStatus('codeMapTable').data || [];
+            if (checkedRows.length <= 0) {
+                layer.msg("请先选择左侧数据！");
+                return;
+            } else if (checkedRows.length > 1) {
+                layer.msg("每次只能操作一条！");
+                return;
+            }
+            var codemapId = checkedRows[0].id;
+            admin.putTempData('codemapId', codemapId);
+            admin.popupCenter({
+                title: "新增详情",
+                path: 'pages/youi/codeItem_form.html',
+                finish: function () {
+                    table.reload('codeitemTable', {});
+                }
+            });
+        });
+        //删除详情信息
+        $('#codeitem-btn-delete').click(function () {
+            var checkedRows = table.checkStatus('codeitemTable').data || [];
+            if (checkedRows.length <= 0) {
+                layer.msg("请勾选要删除的复选框！");
+                return;
+            } else if (checkedRows.length > 1) {
+                layer.msg("每次只能删除一条数据！");
+                return;
+            }
+            var rowData = checkedRows[0];
+            layer.confirm('确定删除吗？', function (i) {
+                admin.req('api-user/codeItem/' + rowData.id, {}, function (data) {
+                    layer.closeAll('loading');
+                    if (data.resp_code == 0) {
+                        layer.msg(data.resp_msg, {icon: 1, time: 500});
+                        table.reload('codeitemTable', {});
+                    } else {
+                        layer.msg(data.resp_msg, {icon: 2, time: 500});
+                    }
+                }, 'delete');
+            });
+        });
+    });
+</script>

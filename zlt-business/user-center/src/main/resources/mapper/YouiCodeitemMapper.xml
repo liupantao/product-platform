@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.central.youi.mapper.YouiCodeitemMapper">
+
+    <sql id="Column_List">
+			id,
+			create_time,
+			update_time,
+			item_caption,
+            item_group,
+            item_value,
+            codemap_id,
+           item_index
+	</sql>
+
+    <sql id="where">
+        <where>
+            <if test="u.id != null and u.id != ''">
+                and t.id  =  #{u.id}
+            </if>
+            <if test="u.itemVal != null and u.itemVal != ''">
+                and t.item_value like concat('%', #{u.itemVal}, '%')
+            </if>
+            <if test="u.capation != null and u.capation != ''">
+                and t.item_caption like concat('%', #{u.capation}, '%')
+            </if>
+            <if test="u.codemapId != null and u.codemapId != ''">
+                and t.codemap_id =#{u.codemapId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findList" resultType="com.central.youi.model.YouiCodeitem">
+        select <include refid="Column_List"/>
+         from youi_codeitem t
+        <include refid="where" />
+
+        order by t.create_time desc, 0+item_index asc
+    </select>
+<!--0+item_index item_index是varchar 类型 无法正常排序,采用0+ 转成数值-->
+    <select id="findItemByMid" resultType="com.central.youi.model.YouiCodeitem" parameterType="java.lang.String">
+        select <include refid="Column_List"/>
+        from youi_codeitem t
+        where t.codemap_id =#{codemapId}
+        order by t.create_time desc, 0+item_index asc
+    </select>
+
+
+</mapper>
