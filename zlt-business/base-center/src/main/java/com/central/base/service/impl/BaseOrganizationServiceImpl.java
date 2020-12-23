@@ -1,5 +1,7 @@
 package com.central.base.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.central.common.model.SysMenu;
 import org.springframework.stereotype.Service;
 import com.central.common.model.PageResult;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -43,8 +45,9 @@ public class BaseOrganizationServiceImpl extends SuperServiceImpl<BaseOrganizati
      */
     @Override
     public PageResult listView(Map<String, Object> params) {
-        Page<BaseOrganization> page = new Page<>(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"));
-        List<BaseOrganization> list  =  baseMapper.findList(page, params);
-        return PageResult.<BaseOrganization>builder().data(list).code(0).count(page.getTotal()).build();
+        List<BaseOrganization> list  =  baseMapper.selectList(
+                new QueryWrapper<BaseOrganization> ().orderByAsc("deep"));
+
+        return PageResult.<BaseOrganization>builder().data(list).code(0).count((long) list.size()).build();
     }
 }

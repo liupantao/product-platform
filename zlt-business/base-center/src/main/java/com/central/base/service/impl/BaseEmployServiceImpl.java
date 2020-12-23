@@ -15,7 +15,7 @@ import com.central.base.mapper.BaseEmployMapper;
 import com.central.base.service.IBaseEmployService;
 
 /**
- * 
+ *
  *
  * @author zlt
  * @date 2020-12-23 09:41:54
@@ -32,6 +32,17 @@ public class BaseEmployServiceImpl extends SuperServiceImpl<BaseEmployMapper, Ba
     public PageResult<BaseEmploy> findList(Map<String, Object> params){
         Page<BaseEmploy> page = new Page<>(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"));
         List<BaseEmploy> list  =  baseMapper.findList(page, params);
+        return PageResult.<BaseEmploy>builder().data(list).code(0).count(page.getTotal()).build();
+    }
+    /**
+     * 列表
+     * @param params
+     * @return
+     */
+    @Override
+    public PageResult<BaseEmploy> listView(Map<String, Object> params){
+        Page<BaseEmploy> page = new Page<>(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"));
+        List<BaseEmploy> list  =  baseMapper.listView(page, params);
         return PageResult.<BaseEmploy>builder().data(list).code(0).count(page.getTotal()).build();
     }
 }

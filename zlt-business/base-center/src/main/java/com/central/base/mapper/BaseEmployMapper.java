@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
- * 
+ *
+ *
  * @author zlt
  * @date 2020-12-23 09:41:54
  */
@@ -24,4 +24,6 @@ public interface BaseEmployMapper extends SuperMapper<BaseEmploy> {
      * @return
      */
     List<BaseEmploy> findList(Page<BaseEmploy> page, @Param("p") Map<String, Object> params);
+
+    List<BaseEmploy> listView(Page<BaseEmploy> page, @Param("u")Map<String, Object> params);
 }

@@ -50,11 +50,11 @@ spring:
           filters:
             - StripPrefix=1
         - id: base
-            uri: lb://base-center
-            predicates:
-              - Path=/api-base/**
-            filters:
-              - StripPrefix=1
+          uri: lb://base-center
+          predicates:
+            - Path=/api-base/**
+          filters:
+            - StripPrefix=1
         - id: file
           uri: lb://file-center
           predicates:

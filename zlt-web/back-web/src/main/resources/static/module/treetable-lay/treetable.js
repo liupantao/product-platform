@@ -47,6 +47,7 @@ layui.define(['layer', 'table'], function (exports) {
                         }
                     }
                 };
+                //第一次的父ID,数据
                 sort(param.treeSpid, tNodes);
 
                 // 重写参数

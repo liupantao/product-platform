@@ -35,9 +35,12 @@
                 <i class="layui-icon">&#xe67c;</i>导入
             </button>
         </div>
+        <!--<table class="layui-table" id="organization-table" lay-filter="organization-table"></table>-->
+        <!--数据表格-->
         <div class="leftTable">
             <table id="organization-leftTable" class="layui-table" lay-filter="organization-leftTable">
             </table>
+
         </div>
 
         <div class="rightTable" id='MyModel'>
@@ -46,10 +49,15 @@
     </div>
 </div>
 
-
+<!-- 表格操作列 -->
+<script type="text/html" id="organization-state">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="look">员工</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 
 <script>
-    layui.use(['form', 'table', 'util', 'config', 'admin', 'upload', 'treetable'], function () {
+    layui.use(['form', 'table', 'util', 'config', 'admin', 'upload','treetable'], function () {
         var form = layui.form;
         var table = layui.table;
         var config = layui.config;
@@ -59,6 +67,7 @@
         //上传
         var upload = layui.upload;
         let treetable = layui.treetable;
+
         // 渲染表格
         var renderTable = function (param) {
             if (param) {
@@ -74,66 +83,61 @@
                 treeIdName: 'id',
                 treePidName: 'parentId',
                 elem: '#organization-leftTable',
-                url: config.base_server + 'api-user/menus/findAlls',
+                url: config.base_server + 'api-base/baseOrganization/listView',
                 where: param,
                 page: false,
                 cols: [[
                     {type: 'numbers'},
-                    {field: 'name', minWidth: 200, title: '菜单名称'},
-                    {field: 'url', title: '菜单url'},
-                    {field: 'path', title: '菜单path'},
-                    {field: 'css',  align: 'center', title: '样式'},
+                    {field: 'name', minWidth: 120, title: '组织名称'},
+                    {field: 'url', width: 80,title: '类型'},
+                    {field: 'path',width: 80, title: '是否启用'},
                     {field: 'sort', width: 80, align: 'center', title: '排序号'},
-                    {
-                        field: 'type', width: 80, align: 'center', templet: function (d) {
-                            if (d.type === 2) {
-                                return '<span class="layui-badge layui-bg-gray">资源</span>';
-                            }
-                            if (d.parentId === -1) {
-                                return '<span class="layui-badge layui-bg-blue">目录</span>';
-                            } else {
-                                return '<span class="layui-badge-rim">菜单</span>';
-                            }
-                        }, title: '类型'
-                    },
-                    {templet: '#menus-state', width: 120, align: 'center', title: '操作'}
+                    {templet: '#organization-state', minWidth: 200, align: 'center', title: '操作'}
                 ]]
             });
         };
         renderTable({tenantId: config.clientId});
 
 
-
-
         var cols = [[
             {type :'checkbox', fixed: 'left'},
-            {field:'username', title: '货主简称',width:'200px'},
-            {field:'carrierShortName', title: '承运商分公司简称',width:'10%'},
-            {field:'warehouseId', title: '仓库ID',width:'10%'},
-            {field:'vin', title: '车架号',width:'10%'},
-            {field:'brand', title: '品牌',width:'10%'},
-            {field:'model', title: '车型',width:'8%'},
-            {field:'vehicleStruct', title: '车身结构',width:'5%'},
-            {field:'exteriorColor', title: '外观色',width:'5%'},
-            {field:'interiorColor', title: '内饰色',width:'5%'},
-            {field:'orderNo', title: '订单号',width:'10%'},
-            {field:'createTime', title: '入库时间',width:'10%'}
+            {field:'name', title: '姓名',width:'200'},
+            {field:'phone', title: '手机号',width:'200'}
         ]];
         var tableElement = table.render({
             elem : '#organization-rightTable',
             method : 'GET',
-            url: config.base_server + 'api-user/users',
+            url: config.base_server + 'api-base/baseEmploy/listView',
             headers:{'Authorization': 'Bearer ' + config.getToken().access_token},
-            cellMinWidth : 80,
+            cellMinWidth : 100,
             height : 'full',
             cols : cols,
             page : true,
-            limits: [10,30,90,150],
-            limit: 10,
+            limits: [15,30,90,150],
+            limit: 15,
             done: function(res, page, count, convertArray){
                 currentPage = page;
             }
         });
+
+
+        // 监听行单击事件
+        // 工具条点击事件
+        table.on('tool(organization-leftTable)', function (obj) {
+            debugger;
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'look') { // 查看人员
+                showRightTable(data);
+            }
+
+        });
+
+        //查看员工表格
+        function showRightTable(data){
+            //右侧表格刷新
+            table.reload('organization-rightTable', {where: {organization_id: data.id}});
+        }
 
 
 

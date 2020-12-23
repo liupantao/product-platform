@@ -71,4 +71,17 @@ public class BaseEmployController {
         baseEmployService.removeById(id);
         return Result.succeed("删除成功");
     }
+
+    /**
+     * 列表
+     */
+    @ApiOperation(value = "查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
+    })
+    @GetMapping("/listView")
+    public PageResult listView(@RequestParam Map<String, Object> params) {
+        return baseEmployService.listView(params);
+    }
 }

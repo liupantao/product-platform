@@ -2,7 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.central.base.mapper.BaseEmployMapper">
+
+    <sql id="where">
+        <where>
+            <if test="u.organization_id != null and u.organization_id != ''">
+                and t.organization_id = #{u.organization_id}
+            </if>
+        </where>
+    </sql>
+
     <select id="findList" resultType="com.central.base.model.BaseEmploy">
         select * from base_employ t
+        <include refid="where" />
+        order by t.create desc
+    </select>
+
+    <select id="listView" resultType="com.central.base.model.BaseEmploy">
+        select * from base_employ t
+        <include refid="where" />
+        order by t.create_time desc
     </select>
 </mapper>

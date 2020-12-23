@@ -2,6 +2,7 @@ package com.central.base.model;
 
 import com.central.common.model.SuperEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.central.common.model.SuperUEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @TableName("base_organization")
-public class BaseOrganization extends SuperEntity {
+public class BaseOrganization extends SuperUEntity {
     private static final long serialVersionUID=1L;
 
         private String name;
